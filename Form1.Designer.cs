@@ -40,6 +40,7 @@
             runningGamesTime = new ListBox();
             logBox = new RichTextBox();
             toggleLogButton = new Button();
+            versionLabel = new Label();
             SuspendLayout();
             // 
             // gamesList
@@ -186,12 +187,25 @@
             toggleLogButton.UseVisualStyleBackColor = false;
             toggleLogButton.Click += toggleLogButton_Click;
             // 
+            // versionLabel
+            // 
+            versionLabel.AutoSize = true;
+            versionLabel.BackColor = Color.FromArgb(10, 14, 23);
+            versionLabel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            versionLabel.ForeColor = Color.FromArgb(56, 189, 248);
+            versionLabel.Location = new Point(505, 16);
+            versionLabel.Name = "versionLabel";
+            versionLabel.Size = new Size(40, 15);
+            versionLabel.TabIndex = 11;
+            versionLabel.Text = "v0.0.0";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(10, 14, 23);
             ClientSize = new Size(800, 450);
+            Controls.Add(versionLabel);
             Controls.Add(toggleLogButton);
             Controls.Add(logBox);
             Controls.Add(runningGamesTime);
@@ -225,5 +239,6 @@
         private ListBox runningGamesTime;
         private RichTextBox logBox;
         private Button toggleLogButton;
+        private Label versionLabel;
     }
 }

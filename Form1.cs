@@ -1,8 +1,6 @@
-using System.Diagnostics;
-using System.Net;
-using System.Runtime.Intrinsics.Arm;
-using System.Security.Cryptography;
 using System.Text.Json;
+using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Text.Json.Serialization;
 
 namespace DiscordGameSpoofer
@@ -53,6 +51,8 @@ namespace DiscordGameSpoofer
         {
             InitializeComponent();
 
+            versionLabel.Text = $"v{Config.version}";
+
             gamesList.Items.Add("Loading...");
             gamesList.Items.Add("This can");
             gamesList.Items.Add("take a second.");
@@ -76,6 +76,7 @@ namespace DiscordGameSpoofer
             // This is just incase
             startButton.Enabled = false;
 
+            await CheckVersion();
             await SetupApplicationAsync();
             await LoadDetectableGamesAsync();
 
@@ -110,6 +111,32 @@ namespace DiscordGameSpoofer
 
             logBox.SelectionStart = logBox.TextLength;
             logBox.ScrollToCaret();
+        }
+
+        private async Task CheckVersion()
+        {
+            try
+            {
+                log("Checking version.");
+                using HttpClient client = new HttpClient();
+
+                string latestVersion = (await client.GetStringAsync(Config.versionCheckUrl)).Trim();
+                
+                if (latestVersion != Config.version)
+                {
+                    log("A new version of Discord Game Spoofer is available, please update to the latest version.\nThis version will keep working.");
+                    MessageBox.Show("A new version of Discord Game Spoofer is available, please update to the latest version.\nThis version will keep working.");
+                }
+                else
+                {
+                    log("Latest version of Discord Game Spoofer in use.");
+                }
+            }
+            catch (Exception ex)
+            {
+                log($"Failed to check version: {ex.Message}");
+                MessageBox.Show("Failed to check version: " + ex.Message);
+            }
         }
 
         private async Task LoadDetectableGamesAsync()
