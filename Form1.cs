@@ -1,6 +1,7 @@
-using System.Text.Json;
 using System.Diagnostics;
+using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace DiscordGameSpoofer
@@ -120,8 +121,10 @@ namespace DiscordGameSpoofer
                 log("Checking version.");
                 using HttpClient client = new HttpClient();
 
-                string latestVersion = (await client.GetStringAsync(Config.versionCheckUrl)).Trim();
-                
+                client.DefaultRequestHeaders.UserAgent.ParseAdd("DiscordGameSpoofer"); // Got HTTP 403 without a header
+                using JsonDocument jsonDoc = JsonDocument.Parse(await client.GetStringAsync(Config.versionCheckUrl));
+                string latestVersion = jsonDoc.RootElement.GetProperty("tag_name").ToString();
+
                 if (latestVersion != Config.version)
                 {
                     log("A new version of Discord Game Spoofer is available, please update to the latest version.\nThis version will keep working.");
