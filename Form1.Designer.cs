@@ -41,6 +41,7 @@
             logBox = new RichTextBox();
             toggleLogButton = new Button();
             versionLabel = new Label();
+            checkBox1 = new CheckBox();
             SuspendLayout();
             // 
             // gamesList
@@ -199,12 +200,29 @@
             versionLabel.TabIndex = 11;
             versionLabel.Text = "v0.0.0";
             // 
+            // checkBox1
+            // 
+            checkBox1.BackColor = Color.FromArgb(10, 14, 23);
+            checkBox1.FlatAppearance.BorderColor = Color.FromArgb(56, 189, 248);
+            checkBox1.FlatAppearance.CheckedBackColor = Color.FromArgb(14, 165, 233);
+            checkBox1.FlatAppearance.MouseDownBackColor = Color.FromArgb(17, 24, 39);
+            checkBox1.FlatAppearance.MouseOverBackColor = Color.FromArgb(24, 32, 50);
+            checkBox1.FlatStyle = FlatStyle.Flat;
+            checkBox1.ForeColor = Color.FromArgb(226, 232, 240);
+            checkBox1.Location = new Point(285, 12);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(204, 23);
+            checkBox1.TabIndex = 12;
+            checkBox1.Text = "Auto Stop after 20min";
+            checkBox1.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(10, 14, 23);
             ClientSize = new Size(800, 450);
+            Controls.Add(checkBox1);
             Controls.Add(versionLabel);
             Controls.Add(toggleLogButton);
             Controls.Add(logBox);
@@ -240,5 +258,6 @@
         private RichTextBox logBox;
         private Button toggleLogButton;
         private Label versionLabel;
+        private CheckBox checkBox1;
     }
 }

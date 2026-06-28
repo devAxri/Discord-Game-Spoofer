@@ -167,8 +167,11 @@ namespace DiscordGameSpoofer
 
                 foreach (DiscordDetectableApplication game in games)
                 {
-                    allGames.Add(game);
-                    gamesList.Items.Add(game);
+                    if (game.Executables.Count != 0)
+                    {
+                        allGames.Add(game);
+                        gamesList.Items.Add(game);
+                    }
                 }
 
                 log($"Loaded {games.Count} detectable games.");
